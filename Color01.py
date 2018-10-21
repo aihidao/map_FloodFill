@@ -42,6 +42,7 @@ def MapColorP(color):
         return MapColorP(color,1)
 
 print("-------------------------------处理中----------------------------------")
+
 color=(0,0,0)
 color=MapColorP(color)
 
@@ -81,14 +82,15 @@ for j in range(1,im.size[1]):
                 im.putpixel((i,j),color)
 
 print("颜色总数",len(colorFatherDir))
+realColor={}
 for father in colorFatherDir:
-    father=randMapColor()
+    realColor[findAncestors(father)]=randMapColor()
 
 for j in range(1,im.size[1]):
     for i in range(1,im.size[0]):
         if isVaildColor(im.getpixel((i,j))):
             colFather=im.getpixel((i,j))
-            im.putpixel((i,j),findAncestors(colFather))
+            im.putpixel((i,j),realColor[findAncestors(colFather)])
             
 
 im.show()
